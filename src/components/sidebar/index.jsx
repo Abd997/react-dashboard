@@ -11,21 +11,47 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined"
 import { useState } from "react"
-import { Box } from "@mui/material"
+import { Box, Drawer, IconButton, Typography, useTheme } from "@mui/material"
+import { tokens } from "../../theme"
 
 export default function Sidebar() {
+  const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const [selected, setSelected] = useState("Dashboard")
+  // return (
+  //   <ProSidebar>
+  //     <Menu>
+  //       <SubMenu label="Charts">
+  //         <MenuItem> Pie charts </MenuItem>
+  //         <MenuItem> Line charts </MenuItem>
+  //       </SubMenu>
+  //       <MenuItem> Documentation </MenuItem>
+  //       <MenuItem> Calendar </MenuItem>
+  //     </Menu>
+  //   </ProSidebar>
+  // )
   return (
-    <Box sx={{
-      "& .pro-sidebar-inner": { background: `${colors.primary[400]} !important` },
-      "& .pro-icon-wrapper": { backgroundColor: "transparent !important" },
-      "& .pro-inner-item": { padding: "5px 35px 5px 20px !important" },
-      "& .pro-inner-item:hover": { color: "#868dfb !important" },
-      "& .pro-menu-item.active": { color: "#6870fa !important" },
-    }}>
-
-    </Box>
-  )
+    <Drawer open={isCollapsed}>
+      <Box sx={{ width: 350, height: "100%", backgroundColor: colors.primary[400] }} role="presentation">
+        <Box display="flex" alignItems="center" justifyContent="space-between" p="20px">
+          <Typography variant="h3" color={colors.grey[100]}>ADMINS</Typography>
+          <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+            <MenuOutlinedIcon />
+          </IconButton>
+        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <img alt="profile-user" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="100px" height="100px" style={{ cursor: "pointer", borderRadius: "50%" }}/>
+        </Box>
+        <Box textAlign="center">
+          <Typography variant="h2" color={colors.grey[100]} fontWeight="bold" sx={{ mt: "10px" }}>Ed roh</Typography>
+          <Typography variant="h5" color={colors.greenAccent[500]}>VP</Typography>
+        </Box>
+        {/* MENU ITEMS */}
+        <Box>
+          
+        </Box>
+      </Box>
+    </Drawer>
+   )
 }
